@@ -6,7 +6,7 @@ ApplicationWindow{
     visible: true
     width: 800
     height: 600
-    property int fs: width*0.02
+    property int fs: width*0.04
     color:'#666666'
     Item{
         id:xApp
@@ -75,7 +75,7 @@ ApplicationWindow{
                 id: txt
                 color:parseInt(vid)!==-10?'black':'white'
                 font.pixelSize: app.fs
-                text: parseInt(vid)!==-10? '<b>id:</b> '+vid+'<br><b>Nombre:</b> '+vnom+'<br><b>Precio:</b> $'+vprec+' <b>Fecha:</b>'+vfecha+'<br><b>Proveedor:</b>'+vprov :'<b>Resultados con palabra:</b> '+vnom
+                text: parseInt(vid)!==-10? '<b>Nombre:</b> '+vnom+'<br><b style="font-size:'+app.fs*2+'px;">Precio:</b> $'+vprec+' <b  style="font-size:'+app.fs*2+'px;">Fecha:</b>'+vfecha+'<br><b>Proveedor:</b>'+vprov :'<b>Resultados con palabra:</b> '+vnom
                 textFormat: Text.RichText
                 width: parent.width-app.fs
                 wrapMode: Text.WordWrap
