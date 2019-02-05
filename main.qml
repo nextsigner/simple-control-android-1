@@ -97,6 +97,10 @@ ApplicationWindow{
         for(var i=0;i<p1.length;i++){
             b+=p1[i]+'%'
         }
+        b+='\' or nombre like \'%'
+        for(var i=p1.length;i>0;i++){
+            b+=p1[i]+'%'
+        }
         b+='\''
         var sql='select distinct * from productos where '+b+''
         console.log('Sql: '+sql)
