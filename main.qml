@@ -86,7 +86,8 @@ ApplicationWindow{
     Component.onCompleted: {
         console.log('Conectando a '+pws+'/productos.sqlite')
         console.log('Existe archivo sqlite: '+unik.fileExist(pws+'/productos.sqlite'))
-        unik.sqliteInit(pws+'/productos.sqlite')
+        var op=unik.sqliteInit(pws+'/productos.sqlite')
+        console.log('Sqlite: abierto: '+op)
     }
     function actualizarLista(){
         lm.clear()
@@ -94,11 +95,12 @@ ApplicationWindow{
         var p1=buscador.text.split(' ')
         lm.append(lm.addProd('-10', buscador.text, '', '',''))
         var b='nombre like \'%'
+        //b+=p1[0]+'%'
         for(var i=0;i<p1.length;i++){
             b+=p1[i]+'%'
         }
         b+='\' or nombre like \'%'
-        for(i=p1.length;i>0;i--){
+        for(i=p1.length-1;i>-1;i--){
             b+=p1[i]+'%'
         }
         b+='\''
