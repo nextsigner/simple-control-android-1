@@ -98,7 +98,7 @@ ApplicationWindow{
             b+=p1[i]+'%'
         }
         b+='\' or nombre like \'%'
-        for(var i=p1.length;i>0;i++){
+        for(i=p1.length;i>0;i--){
             b+=p1[i]+'%'
         }
         b+='\''
