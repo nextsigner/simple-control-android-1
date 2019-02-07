@@ -30,7 +30,8 @@ ApplicationWindow{
                     id: buscador
                     font.pixelSize: app.fs
                     width:app.width-labelBuscar.width-app.fs*2
-                    onTextChanged: actualizarLista()
+                    onTextChanged: tb.restart()
+                    focus: true
                 }
             }
             Text {
@@ -81,6 +82,15 @@ ApplicationWindow{
                 wrapMode: Text.WordWrap
                 anchors.centerIn: parent
             }
+        }
+    }
+    Timer{
+        id: tb
+        repeat: false
+        running: false
+        interval: 500
+        onTriggered: {
+            actualizarLista()
         }
     }
     Component.onCompleted: {
