@@ -1,13 +1,21 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
+import Qt.labs.settings 1.0
 
 ApplicationWindow{
     id: app
     visible: true
     width: 800
     height: 600
+    property string moduleName: 'simple-control-android-1'
     property int fs: width*0.04
     color:'#666666'
+    Settings{
+        id: appSettings
+        category: 'cfg-'+app.moduleName
+        property string urlBd
+
+    }
     Item{
         id:xApp
         anchors.fill: parent
@@ -34,11 +42,56 @@ ApplicationWindow{
                     focus: true
                 }
             }
-            Text {
-                id: cant
-                text: 'Resultados: 0'
-                font.pixelSize: app.fs
-                color: 'white'
+            Item{
+                height: app.fs
+                width: parent.width
+                Text {
+                    id: cant
+                    text: 'Resultados: 0'
+                    font.pixelSize: app.fs
+                    color: 'white'
+                }
+                Rectangle{
+                    width: parent.width*0.35
+                    height: parent.height
+                    anchors.right: parent.right
+                    anchors.rightMargin: app.fs*0.5
+                    color: 'transparent'
+                    border.width: 1
+                    border.color: 'white'
+                    Text {
+                        id: txtVerCfg
+                        text: 'Configurar'
+                        color: 'white'
+                        font.pixelSize: parent.width*0.1
+                        anchors.centerIn: parent
+                    }
+                    function ejecutar(){
+                        xc.visible=true
+                    }
+                    MouseArea{
+                        anchors.fill: parent
+                        property bool pres: false
+                        onPressed: {
+                            pres=true
+                            tpres.restart()
+                        }
+                        onReleased: {
+                            tpres.stop()
+                        }
+                        Timer{
+                            id: tpres
+                            running: false
+                            repeat: false
+                            interval: 1500
+                            onTriggered: {
+                                if(parent.pres){
+                                    parent.parent.ejecutar()
+                                }
+                            }
+                       }
+                    }
+                }
             }
             ListView{
                 id: lv
@@ -50,6 +103,7 @@ ApplicationWindow{
                 clip: true
             }
         }
+        Xc{id:xc;visible:false;}
     }
     ListModel{
         id: lm
@@ -94,9 +148,16 @@ ApplicationWindow{
         }
     }
     Component.onCompleted: {
+        if(!appSettings.urlBd){
+            appSettings.urlBd=pws+'/productos.sqlite'
+        }
+        /*
         console.log('Conectando a '+pws+'/productos.sqlite')
         console.log('Existe archivo sqlite: '+unik.fileExist(pws+'/productos.sqlite'))
-        var op=unik.sqliteInit(pws+'/productos.sqlite')
+        */
+    }
+    function iniciarBb(){
+        var op=unik.sqliteInit(appSettings.urlBd)
         console.log('Sqlite: abierto: '+op)
     }
     function actualizarLista(){
