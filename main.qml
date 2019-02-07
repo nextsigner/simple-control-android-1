@@ -192,7 +192,7 @@ ApplicationWindow{
         }
 
         b=''
-        for(var i=0;i<p1.length;i++){
+        for(var i=0;i<p1.length-1;i++){
             /*if(i===0){
                 b+='nombre like \'%'+p1[i]+'%\' '
             }else{
