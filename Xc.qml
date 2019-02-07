@@ -47,12 +47,11 @@ Rectangle {
         }
         Item{width: 1; height: app.fs}
         Button{
-            text: 'Iniciar al inicar Unik'
+            text: 'Reiniciar en Launcher'
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
-                var cfgData='{"arg0" : "-folder='+pws+'/'+app.moduleName+'"}'
                 var cfgFile=''+pws+'/cfg.json'
-                unik.setFile(cfgFile, cfgData)
+                unik.deleteFile(cfgFile)
                 unik.restartApp()
             }
         }

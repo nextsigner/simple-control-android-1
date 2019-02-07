@@ -151,6 +151,12 @@ ApplicationWindow{
         if(!appSettings.urlBd){
             appSettings.urlBd=pws+'/productos.sqlite'
         }
+        iniciarBb()
+
+        var cfgData='{"arg0" : "-folder='+pws+'/'+app.moduleName+'"}'
+        var cfgFile=''+pws+'/cfg.json'
+        unik.setFile(cfgFile, cfgData)
+
         /*
         console.log('Conectando a '+pws+'/productos.sqlite')
         console.log('Existe archivo sqlite: '+unik.fileExist(pws+'/productos.sqlite'))
